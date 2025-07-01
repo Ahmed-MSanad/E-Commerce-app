@@ -1,0 +1,48 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Dependency cache
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Dotnet tools
+tools/
+
+# Publish folder
+wwwroot/
+*.Publish.xml
+
+# Secrets
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+secrets.json
+
+# Visual Studio files
+.vscode/
+.vs/
+*.user
+*.suo
+*.vsidx
+*.db
+*.db-shm
+*.db-wal
+
+# Generated HTTP files
+*.http

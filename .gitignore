@@ -1,0 +1,11 @@
+# Global ignore for node_modules, bin, obj, etc.
+**/node_modules/
+**/bin/
+**/obj/
+**/.vscode/
+**/.idea/
+**/dist/
+**/out-tsc/
+*.log
+.DS_Store
+Thumbs.db
