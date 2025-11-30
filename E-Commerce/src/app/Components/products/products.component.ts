@@ -30,6 +30,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
   toggleCartSignal : WritableSignal<boolean> = signal(false);
   getProductsSubscription ! : Subscription;
   userCartOfProducts : WritableSignal<ICartProduct[]> = signal([]);
+  pagination : {totalItemsCount: WritableSignal<number>, pageIndex: WritableSignal<number>, pageSize: WritableSignal<number>} = {
+    totalItemsCount: signal(0), pageIndex: signal(1), pageSize: signal(5)
+  };
 
   toggleCart(){
     this.toggleCartSignal.update(oldVal => !oldVal);
@@ -67,10 +70,12 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.GetProducts();
   }
   GetProducts(){
-    this._productService.getAllProducts(this.search()).subscribe({
-      next:(res) => {
-        this.productList.set(res);
-        console.log(this.productList());
+    this.getProductsSubscription = this._productService.getAllProducts(this.search(), this.pagination.pageIndex()).subscribe({
+      next:(res : any) => {
+        this.productList.set(res.itemsList);
+        this.pagination.pageIndex.set(res.pageIndex);
+        this.pagination.pageSize.set(res.pageSize);
+        this.pagination.totalItemsCount.set(res.totalItemsCount);
         this.filteredList.set([...this.productList()]);
       },
       error:(err) => {
@@ -79,6 +84,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
     });
   }
   SearchForProducts() : void{
+    this.pagination.pageIndex.set(1);
+    this.pagination.pageSize.set(8);
     this.GetProducts();
   }
   SortProducts(){
@@ -160,6 +167,17 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
   showNextImage(productIndex : number) : void{
     this.filteredList()[productIndex].currentImageIndex.update(oldIndex => oldIndex < this.productList()[productIndex].productImages.length - 1 ? oldIndex + 1 : 0);
+  }
+
+  getPreviousPage() : void{
+    this.pagination.pageIndex.update(oldIndex => oldIndex == 0 ? oldIndex : oldIndex - 1);
+    console.log("new page index: ", this.pagination.pageIndex());
+    this.GetProducts();
+  }
+  getNextPage() : void{
+    this.pagination.pageIndex.update(oldIndex => oldIndex * this.pagination.pageSize() >= this.pagination.totalItemsCount() ? oldIndex : oldIndex + 1);
+    console.log("new page index: ", this.pagination.pageIndex());
+    this.GetProducts();
   }
 
   ngOnDestroy(){

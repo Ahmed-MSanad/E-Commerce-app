@@ -11,15 +11,19 @@ export class ProductService {
 
   private readonly _httpClient = inject(HttpClient);
 
-  getAllProducts(searchTerm : string) : Observable<any[]>{
-    return this._httpClient.get<any[]>(`${environment.apiBaseUrl}/Product/GetProducts`, {
+  getAllProducts(searchTerm : string, pageIndex : number) : Observable<any>{
+    return this._httpClient.get<any>(`${environment.apiBaseUrl}/Product/GetProducts`, {
       params:{
-        search: searchTerm
+        search: searchTerm,
+        PageIndex: pageIndex,
+        PageSize: 8
       }
-    }).pipe(map((products : any[]) => {
-      return products.map((product: any) => {
+    }).pipe(map((PaginatedProducts : any) => {
+      let mappedProducts = PaginatedProducts.itemsList.map((product: any) => {
         return {...product, IsLoved: signal(false), currentImageIndex: signal(0)};
-      });}));
+      });
+      return {totalItemsCount: PaginatedProducts.totalItemsCount, pageIndex: PaginatedProducts.pageIndex, pageSize: PaginatedProducts.pageSize, itemsList: mappedProducts}
+    }));
   }
 
   getProductDetails(id : number) : Observable<any>{

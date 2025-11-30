@@ -13,6 +13,9 @@ namespace Persistence
 
             query = specification.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
 
+            if(specification.isPaginated)
+                query = query.Skip(specification.Skip).Take(specification.Take);
+
             return query;
         }
     }
