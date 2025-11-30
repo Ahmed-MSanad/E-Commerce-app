@@ -1,0 +1,104 @@
+<div class="min-h-screen bg-gradient-to-r from-orange-200 to-orange-500 flex items-center justify-center p-4">
+    <div *ngIf="isSuccess"
+        class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md text-center transform animate-pulse">
+        <div
+            class="w-20 h-20 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-check-circle text-white text-4xl"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Registration Successful!</h2>
+        <p class="text-gray-600 mb-6">Welcome to our platform, {{registerForm.get('username')?.value}}!</p>
+        <button (click)="resetForm()"
+            class="w-full bg-gradient-to-r from-orange-400 to-orange-600 text-white py-3 rounded-xl font-semibold hover:from-orange-500 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+            Login Now
+        </button>
+    </div>
+
+    <div *ngIf="!isSuccess" class="w-full max-w-lg">
+        <div class="text-center mb-8">
+            <div
+                class="w-20 h-20 bg-white bg-opacity-20 backdrop-blur-lg rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <i class="fas fa-user text-3xl"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-2">Create Account</h1>
+        </div>
+
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white border-opacity-20">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="font-semibold flex items-center space-x-2">
+                        <i class="fas fa-user"></i>
+                        <span>Username</span>
+                    </label>
+                    <div class="relative">
+                        <input type="text" formControlName="username" placeholder="Choose a username"
+                            [class]="'w-full px-4 py-3 bg-opacity-20 border rounded-xl placeholder-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300 ' + (hasError('username') ? 'border-red-400 focus:ring-red-400' : 'border-white border-opacity-30')" />
+                        <i class="fas fa-user absolute right-3 top-1/2 transform -translate-y-1/2 text-orange-500"></i>
+                    </div>
+                    <div *ngIf="hasError('username')" class="flex items-center space-x-2 text-red-500 text-sm">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>{{getErrorMessage('username')}}</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="font-semibold flex items-center space-x-2">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email Address</span>
+                    </label>
+                    <div class="relative">
+                        <input type="email" formControlName="email" placeholder="Enter your email"
+                            [class]="'w-full px-4 py-3 bg-opacity-20 border rounded-xl placeholder-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300 ' + (hasError('email') ? 'border-red-400 focus:ring-red-400' : 'border-white border-opacity-30')" />
+                        <i
+                            class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-orange-500"></i>
+                    </div>
+                    <div *ngIf="hasError('email')" class="flex items-center space-x-2 text-red-500 text-sm">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>{{getErrorMessage('email')}}</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="font-semibold flex items-center space-x-2">
+                        <i class="fas fa-lock"></i>
+                        <span>Password</span>
+                    </label>
+                    <div class="relative">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            placeholder="Create a strong password"
+                            [class]="'w-full px-4 py-3 pr-12 bg-white bg-opacity-20 border rounded-xl placeholder-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300 ' + (hasError('password') ? 'border-red-400 focus:ring-red-400' : 'border-white border-opacity-30')" />
+                        <button type="button" (click)="togglePasswordVisibility()"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-orange-500 cursor-pointer">
+                            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                        </button>
+                    </div>
+
+                    <div *ngIf="hasError('password')" class="flex items-center space-x-2 text-red-500 text-sm">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>{{getErrorMessage('password')}}</span>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="isSubmitting"
+                    class="w-full bg-gradient-to-r from-orange-200 to-orange-500 hover:from-orange-500 hover:to-orange-200 text-white transition duration-300 ease-in-out cursor-pointer py-4 rounded-xl font-bold text-lg hover:bg-orange-50 transform hover:scale-105">
+                    <div *ngIf="isSubmitting" class="flex items-center justify-center space-x-2">
+                        <div class="w-5 h-5 border-2 border-orange-600 border-t-transparent rounded-full animate-spin">
+                        </div>
+                        <span>Creating Account...</span>
+                    </div>
+                    <span *ngIf="!isSubmitting">Create Account</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-orange-600">
+                    Already have an account?
+                    <button class="font-semibold hover:underline cursor-pointer ml-1" routerLink="/Login"> Sign In </button>
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center mt-6 text-orange-100 text-sm">
+            <p>By creating an account, you agree to our Terms of Service and Privacy Policy</p>
+        </div>
+    </div>
+</div>

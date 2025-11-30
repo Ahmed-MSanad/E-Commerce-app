@@ -1,0 +1,62 @@
+[
+    {
+        "Name": "Smartphones",
+        "Image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+        "ProductCategoryId": 1
+    },
+    {
+        "Name": "Tablets",
+        "Image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=300&fit=crop",
+        "ProductCategoryId": 1
+    },
+    {
+        "Name": "Gaming Consoles",
+        "Image": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=300&fit=crop",
+        "ProductCategoryId": 1
+    },
+    {
+        "Name": "Athletic Shoes",
+        "Image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
+        "ProductCategoryId": 2
+    },
+    {
+        "Name": "Activewear",
+        "Image": "https://images.unsplash.com/photo-1506629905607-ce4c0a6e1bb0?w=400&h=300&fit=crop",
+        "ProductCategoryId": 2
+    },
+    {
+        "Name": "Fitness Equipment",
+        "Image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop",
+        "ProductCategoryId": 3
+    },
+    {
+        "Name": "Outdoor Gear",
+        "Image": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop",
+        "ProductCategoryId": 3
+    },
+    {
+        "Name": "Laptops",
+        "Image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop",
+        "ProductCategoryId": 4
+    },
+    {
+        "Name": "Desktop Computers",
+        "Image": "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&h=300&fit=crop",
+        "ProductCategoryId": 4
+    },
+    {
+        "Name": "Computer Peripherals",
+        "Image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop",
+        "ProductCategoryId": 4
+    },
+    {
+        "Name": "DSLR Cameras",
+        "Image": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400&h=300&fit=crop",
+        "ProductCategoryId": 5
+    },
+    {
+        "Name": "Camera Lenses",
+        "Image": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400&h=300&fit=crop",
+        "ProductCategoryId": 5
+    }
+]

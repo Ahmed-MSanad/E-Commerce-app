@@ -1,0 +1,46 @@
+<header>
+    <div class="">
+        <aside [@toggleSideNavAnimation]="SideNavState()" class="w-80 fixed top-0 left-0 bottom-0 dark:from-black dark:to-black dark:shadow-md dark:shadow-orange-200 bg-gradient-to-b from-orange-300 to-orange-500 z-[9999] flex flex-col">
+            <ul>
+                <li class="text-white py-5 flex justify-between mx-6">
+                    <div class="text-2xl font-bold">
+                        Talabat
+                    </div>
+                    <button class="cursor-pointer" (click)="toggleSideNav()">
+                        <i class="fa-solid"
+                            [ngClass]="{'fa-arrow-left': SideNavState() === 'open', 'fa-arrow-right': SideNavState() === 'close'}"></i>
+                    </button>
+                </li>
+            </ul>
+            <ul class="space-y-4 p-2 flex flex-col h-screen">
+                <li class="p-2 cursor-pointer text-white rounded-lg flex justify-between items-center" routerLinkActive="bg-orange-500" routerLink="/Products">
+                    <span>Products</span>
+                    <i class="fa-solid fa-list"></i>
+                </li>
+                <li>
+                    <button (click)="LogOut()" class="p-2 cursor-pointer text-white rounded-lg flex justify-between items-center space-x-5">
+                        <span>Log Out</span>
+                        <span><i class="fas fa-sign-out-alt"></i></span>
+                    </button>
+                </li>
+                <li class="mt-auto flex">
+                    <button (click)="toggleDarkMode()" class="ml-auto w-1/2 bg-black text-white dark:bg-orange-500 py-6 rounded-full relative cursor-pointer">
+                        <span class="absolute left-2 hidden dark:block top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-sun"></i></span>
+                        <div class="absolute z-1 left-1 bg-white dark:bg-black dark:left-[calc(100%-2.25rem)] transition-all duration-300 ease-in-out top-1/2 -translate-y-1/2 w-8 h-8 rounded-full"></div>
+                        <span class="absolute right-2 dark:hidden block top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-moon"></i></span>
+                    </button>
+                </li>
+            </ul>
+        </aside>
+        @if(currentWindowWidth() > 567){
+            <div [@toggleNavAnimation]="SideNavState()" class="p-4">
+                <router-outlet></router-outlet>
+            </div>
+        }
+        @else {
+            <div class="p-4 pl-17">
+                <router-outlet></router-outlet>
+            </div>
+        }
+    </div>
+</header>

@@ -1,0 +1,36 @@
+<Main class="p-15">
+    <div class="max-w-[70%] mx-auto flex flex-col md:flex-row group transition hover:-translate-y-1 p-4 md:space-x-4 space-y-4">
+        <div class="relative min-w-1/2">
+            <!-- <button (click)="_productService.ToggleIsLoved(product())" class="z-1 absolute top-5 left-5 text-red-500 text-xl cursor-pointer">
+                <i [class]="product().IsLoved()"></i>
+            </button> -->
+            <img [src]="product().productImages[product().currentImageIndex()].image" (error)="_productService.HandleImageError($event)" [alt]="product().name" class="block w-full object-contain">
+            <button (click)="showPreviousImage()" class="absolute top-1/2 -translate-y-1/2 left-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-left"></i></button>
+            <button (click)="showNextImage()" class="absolute top-1/2 -translate-y-1/2 right-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="p-2 pb-4 grow flex flex-col justify-between min-w-1/2">
+            <div class="space-y-3">
+                <h3 class="text-2xl font-bold">{{product().name}}</h3>
+                <div class="space-y-4">
+                    <div class="md:w-1/2 mx-auto max-w-[20rem] min-w-[13rem] text-center text-orange-50 bg-orange-500 py-4 px-8 rounded-2xl">
+                        <span>Special Price</span>
+                        <p class="font-bold text-4xl text-center">${{product().price}}</p>
+                    </div>
+                    <div class="md:w-1/2 mx-auto min-w-[13rem] border p-4 text-center py-4 px-8 rounded-2xl">
+                        <h3 class="text-xl font-bold">📒Product Description</h3>
+                        <p class="text-gray-500">{{product().description}}</p>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <div class="border-5 border-transparent border-l-orange-500 rounded-xl p-2 space-y-3">
+                            <div><span class="p-3 rounded-full bg-orange-500">📱</span></div>
+                            <span class="text-gray-500 font-bold">Category</span>
+                            <p class="font-bold">{{product().productSubCategory}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</Main>
+
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,98 @@
+[
+    {
+        "Name": "iPhone 15 Pro",
+        "Description": "Latest flagship smartphone with A17 Pro chip, titanium design, and advanced camera system.",
+        "Price": 999.99,
+        "StockQuantity": 150,
+        "ProductBrandId": 1,
+        "ProductSubCategoryId": 1
+    },
+    {
+        "Name": "Samsung Galaxy S24 Ultra",
+        "Description": "Premium Android smartphone with S Pen, 200MP camera, and AI-powered features.",
+        "Price": 1199.99,
+        "StockQuantity": 85,
+        "ProductBrandId": 2,
+        "ProductSubCategoryId": 1
+    },
+    {
+        "Name": "iPad Pro 12.9",
+        "Description": "Professional tablet with M2 chip, Liquid Retina XDR display, and Apple Pencil support.",
+        "Price": 1099.99,
+        "StockQuantity": 75,
+        "ProductBrandId": 1,
+        "ProductSubCategoryId": 2
+    },
+    {
+        "Name": "PlayStation 5",
+        "Description": "Next-generation gaming console with 4K gaming, ray tracing, and ultra-fast SSD.",
+        "Price": 499.99,
+        "StockQuantity": 45,
+        "ProductBrandId": 5,
+        "ProductSubCategoryId": 3
+    },
+    {
+        "Name": "Xbox Series X",
+        "Description": "Powerful gaming console with 4K/120fps gaming, Quick Resume, and Game Pass integration.",
+        "Price": 499.99,
+        "StockQuantity": 60,
+        "ProductBrandId": 6,
+        "ProductSubCategoryId": 3
+    },
+    {
+        "Name": "Nike Air Max 270",
+        "Description": "Comfortable lifestyle sneaker with Max Air unit and breathable mesh upper.",
+        "Price": 150.00,
+        "StockQuantity": 200,
+        "ProductBrandId": 3,
+        "ProductSubCategoryId": 4
+    },
+    {
+        "Name": "Adidas Ultraboost 22",
+        "Description": "Premium running shoe with Boost midsole and Primeknit upper for ultimate comfort.",
+        "Price": 190.00,
+        "StockQuantity": 120,
+        "ProductBrandId": 4,
+        "ProductSubCategoryId": 4
+    },
+    {
+        "Name": "Dell XPS 13",
+        "Description": "Ultra-portable laptop with 13.4-inch InfinityEdge display and Intel Core i7 processor.",
+        "Price": 1299.99,
+        "StockQuantity": 30,
+        "ProductBrandId": 7,
+        "ProductSubCategoryId": 8
+    },
+    {
+        "Name": "HP Pavilion Desktop",
+        "Description": "Powerful desktop computer with Intel Core i5, 16GB RAM, and 512GB SSD.",
+        "Price": 749.99,
+        "StockQuantity": 25,
+        "ProductBrandId": 8,
+        "ProductSubCategoryId": 9
+    },
+    {
+        "Name": "Canon EOS R5",
+        "Description": "Professional mirrorless camera with 45MP sensor, 8K video recording, and in-body stabilization.",
+        "Price": 3899.99,
+        "StockQuantity": 15,
+        "ProductBrandId": 9,
+        "ProductSubCategoryId": 11
+    },
+    {
+        "Name": "Nikon D850",
+        "Description": "High-resolution DSLR camera with 45.7MP sensor, 4K UHD video, and exceptional image quality.",
+        "Price": 2999.99,
+        "StockQuantity": 20,
+        "ProductBrandId": 10,
+        "ProductSubCategoryId": 11
+    },
+    {
+        "Name": "Canon RF 24-70mm f/2.8L IS USM",
+        "Description": "Professional zoom lens with image stabilization and weather sealing for Canon RF mount.",
+        "Price": 2299.99,
+        "StockQuantity": 12,
+        "ProductBrandId": 9,
+        "ProductSubCategoryId": 12
+    }
+]

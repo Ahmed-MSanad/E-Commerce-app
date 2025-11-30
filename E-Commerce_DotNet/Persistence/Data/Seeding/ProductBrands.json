@@ -1,0 +1,52 @@
+[
+    {
+        "Name": "Apple",
+        "Description": "Innovative technology company known for premium consumer electronics, software, and digital services.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+    },
+    {
+        "Name": "Samsung",
+        "Description": "Global technology conglomerate specializing in electronics, semiconductors, and digital media technologies.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg"
+    },
+    {
+        "Name": "Nike",
+        "Description": "Leading athletic footwear and apparel company inspiring athletes worldwide with innovative sports products.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+    },
+    {
+        "Name": "Adidas",
+        "Description": "German multinational corporation designing and manufacturing athletic shoes, clothing, and accessories.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+    },
+    {
+        "Name": "Sony",
+        "Description": "Japanese multinational conglomerate known for electronics, entertainment, and gaming products.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg"
+    },
+    {
+        "Name": "Microsoft",
+        "Description": "Technology corporation developing computer software, consumer electronics, and cloud computing services.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+    },
+    {
+        "Name": "Dell",
+        "Description": "American technology company providing computer hardware, software, and related services worldwide.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"
+    },
+    {
+        "Name": "HP",
+        "Description": "Global technology company offering personal computing, printing, and enterprise solutions.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg"
+    },
+    {
+        "Name": "Canon",
+        "Description": "Japanese multinational corporation specializing in imaging, optical, and industrial products.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/6/65/Canon_wordmark.svg"
+    },
+    {
+        "Name": "Nikon",
+        "Description": "Japanese multinational corporation specializing in optics, imaging, and precision equipment.",
+        "Logo": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Nikon_logo.svg"
+    }
+]

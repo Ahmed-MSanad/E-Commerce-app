@@ -1,0 +1,22 @@
+[
+    {
+        "Name": "Electronics",
+        "Image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=300&fit=crop"
+    },
+    {
+        "Name": "Clothing & Apparel",
+        "Image": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop"
+    },
+    {
+        "Name": "Sports & Outdoors",
+        "Image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+    },
+    {
+        "Name": "Computers & Accessories",
+        "Image": "https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=300&fit=crop"
+    },
+    {
+        "Name": "Photography",
+        "Image": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop"
+    }
+]

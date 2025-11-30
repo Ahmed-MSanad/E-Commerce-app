@@ -27,6 +27,9 @@
               }
             ],
             "styles": [
+              "node_modules/ngx-spinner/animations/ball-pulse.css",
+              "node_modules/ngx-spinner/animations/cog.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss"
             ],
             "server": "src/main.server.ts",
@@ -40,8 +43,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -54,7 +57,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/Core/environments/environment.ts",
+                  "with": "src/app/Core/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
