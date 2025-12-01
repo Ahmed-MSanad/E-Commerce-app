@@ -17,21 +17,3 @@ export interface IRating{
     rate: number,
     count: number
 }
-
-export interface ICartProduct{
-    product : IProduct,
-    productCount : number
-}
-
-export interface ICartPayload {
-    userId: number;
-    date: string;
-    products: { productId: number; quantity: number }[];
-}
-
-export interface ICartResponse {
-    id: number;
-    userId: number;
-    date: string;
-    products: { productId: number; quantity: number }[];
-}

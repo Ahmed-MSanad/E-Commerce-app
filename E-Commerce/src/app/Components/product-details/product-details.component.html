@@ -7,6 +7,7 @@
             <img [src]="product().productImages[product().currentImageIndex()].image" (error)="_productService.HandleImageError($event)" [alt]="product().name" class="block w-full object-contain">
             <button (click)="showPreviousImage()" class="absolute top-1/2 -translate-y-1/2 left-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-left"></i></button>
             <button (click)="showNextImage()" class="absolute top-1/2 -translate-y-1/2 right-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-right"></i></button>
+            <button (click)="_basketService.AddToBasket(product().id)" class="w-full my-3 px-2 py-1 bg-gradient-to-l from-orange-600 to-orange-300 hover:from-orange-300 hover:to-orange-600 transition duration-500 text-white rounded-xl cursor-pointer">Add To Basket</button>
         </div>
         <div class="p-2 pb-4 grow flex flex-col justify-between min-w-1/2">
             <div class="space-y-3">

@@ -8,8 +8,9 @@ import { IProduct } from '../Interfaces/iproduct';
   providedIn: 'root'
 })
 export class ProductService {
-
   private readonly _httpClient = inject(HttpClient);
+  
+  filteredList : WritableSignal<IProduct[]> = signal([]);
 
   getAllProducts(searchTerm : string, pageIndex : number) : Observable<any>{
     return this._httpClient.get<any>(`${environment.apiBaseUrl}/Product/GetProducts`, {

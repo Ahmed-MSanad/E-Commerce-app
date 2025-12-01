@@ -6,6 +6,7 @@ using Persistence.Data;
 using Persistence.Repositories;
 using Services.Abstraction;
 using Services.Implementation;
+using StackExchange.Redis;
 
 namespace E_Commerce_DotNet
 {
@@ -27,10 +28,14 @@ namespace E_Commerce_DotNet
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("StoreDB"));
             });
+            builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
+                ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"))
+            );
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
             builder.Services.AddAutoMapper(cfg =>
             {

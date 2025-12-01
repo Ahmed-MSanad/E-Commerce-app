@@ -9,7 +9,6 @@ namespace Services.Implementation.MappingProfiles
     {
         public List<ProductImageDto> Resolve(Product source, ProductDto destination, List<ProductImageDto> destMember, ResolutionContext context)
         {
-            List<ProductImageDto> productImageList = new List<ProductImageDto>();
             return source.ProductImages.Select(PImage =>
             {
                 if (string.IsNullOrWhiteSpace(PImage.Image))

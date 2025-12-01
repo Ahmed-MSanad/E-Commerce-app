@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../Core/Services/product.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BasketService } from '../../Core/Services/basket.service';
 
 @Component({
   selector: 'app-product-details.component',
@@ -13,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 export class ProductDetailsComponent implements OnInit{
   private readonly _activatedRoute = inject(ActivatedRoute);
   readonly _productService = inject(ProductService);
+  readonly _basketService = inject(BasketService);
   product : WritableSignal<IProduct> = signal({IsLoved:signal(false), currentImageIndex:signal(0)} as IProduct);
   ngOnInit(){
     this._activatedRoute.paramMap.subscribe((routeParams) => {

@@ -4,7 +4,8 @@ using Shared;
 using Shared.ProductDtos;
 namespace Presentation
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     //[Authorize]
     public class ProductController(IServiceManager serviceManager) : ControllerBase
     {
