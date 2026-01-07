@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Core/Services/auth.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login.component',
@@ -15,13 +16,13 @@ export class LoginComponent {
   showPassword = false;
   isSubmitting = false;
   isSuccess = false;
-  private readonly _auth = inject(AuthService);
+  readonly _auth = inject(AuthService);
   private readonly _router = inject(Router);
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      username: ['mor_2314', [Validators.required]],
-      password: ['83r5^_', [Validators.required]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -34,11 +35,19 @@ export class LoginComponent {
       this.isSubmitting = true;
       this._auth.Login(this.loginForm.value).subscribe({
         next:(res : any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'You have been logged in successfully!',
+            timer: 2000,
+            showConfirmButton: false
+          });
           this.isSubmitting = false;
           this.isSuccess = true;
-          console.log(res);
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('displayName', res.displayName);
+          localStorage.setItem('email', res.email);
           this._router.navigate(["/Products"]);
-          localStorage.setItem("token", res.token);
         },
         error:(err) => {
           console.log(err.error);
@@ -47,39 +56,5 @@ export class LoginComponent {
     } else {
       this.loginForm.markAllAsTouched();
     }
-  }
-
-  resetForm(): void {
-    this.isSuccess = false;
-    this.loginForm.reset();
-    this.showPassword = false;
-    this._router.navigate(["/Login"]);
-  }
-
-  // Helper methods for template
-  hasError(fieldName: string, errorType?: string): boolean {
-    const field = this.loginForm.get(fieldName);
-    if (errorType) {
-      return !!(field?.hasError(errorType) && field?.touched);
-    }
-    return !!(field?.invalid && field?.touched);
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const field = this.loginForm.get(fieldName);
-    if (field?.hasError('required')) {
-      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-    }
-    if (field?.hasError('minlength')) {
-      const requiredLength = field.errors?.['minlength'].requiredLength;
-      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${requiredLength} characters`;
-    }
-    if (field?.hasError('email')) {
-      return 'Please enter a valid email address';
-    }
-    if (field?.hasError('passwordStrength')) {
-      return 'Password must contain uppercase, lowercase, and number';
-    }
-    return '';
   }
 }

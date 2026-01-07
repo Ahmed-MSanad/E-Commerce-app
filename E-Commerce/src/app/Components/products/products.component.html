@@ -14,6 +14,8 @@
     </nav>
 </header>
 
+filtered list: {{_productService.filteredList() | json}}
+
 <Main class="flex dark:bg-black dark:text-white flex-col lg:flex-row">
     <div class="lg:sticky lg:top-5 relative w-full lg:h-screen lg:w-1/6 dark:bg-black dark:shadow-md dark:shadow-orange-200 bg-orange-50 p-4">
         <ul class="space-y-5">
@@ -82,19 +84,31 @@
             </button>
         </div>
         <div class="mt-4" [ngClass]="{'grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4' : _productService.filteredList().length != 0}">
-            @for(product of _productService.filteredList() ; track $index){
+            @for (product of _productService.filteredList(); track $index) {  <!-- Added outer () -->
                 <div class="flex flex-col group transition hover:-translate-y-1">
                     <div class="relative">
                         <button (click)="_productService.ToggleIsLoved(product)" class="absolute top-5 left-5 text-red-500 text-xl cursor-pointer">
                             <i [class]="product.IsLoved() ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
                         </button>
-                        <img [src]="product.productImages[product.currentImageIndex()].image" (error)="_productService.HandleImageError($event)" (click)="GoToProductDetailsPage(product.id)" [alt]="product.name" class="block w-full object-contain cursor-pointer">
-                        <button (click)="showPreviousImage($index)" class="absolute top-1/2 -translate-y-1/2 left-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button (click)="showNextImage($index)" class="absolute top-1/2 -translate-y-1/2 right-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
-                    <div class="p-2 pb-4 border rounded-b-2xl grow flex flex-col justify-between">
-                        <h3 class="text-2xl font-bold">{{product.name}}</h3>
-                        <button class="rounded-lg border px-3 py-1 cursor-pointer" (click)="_basketService.AddToBasket(product.id)">Add To Basket</button>
+                        @if (typeof(product.productImages) !== 'undefined' && product.productImages.length > 0) {  <!-- Added length guard -->
+                            <img [src]="product.productImages[product.currentImageIndex()].image"
+                                (error)="_productService.HandleImageError($event)" 
+                                (click)="GoToProductDetailsPage(product.id)" 
+                                [alt]="product.name" 
+                                class="block w-full object-contain cursor-pointer">
+                            @if (product.productImages.length > 1) {  <!-- Hide arrows if <=1 image -->
+                                <button (click)="showPreviousImage($index)" class="absolute top-1/2 -translate-y-1/2 left-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <button (click)="showNextImage($index)" class="absolute top-1/2 -translate-y-1/2 right-5 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            }
+                        }
+                        <div class="p-2 pb-4 border rounded-b-2xl grow flex flex-col justify-between">
+                            <h3 class="text-2xl font-bold">{{product.name}}</h3>
+                            <button class="rounded-lg border px-3 py-1 cursor-pointer" (click)="_basketService.AddToBasket(product.id)">Add To Basket</button>
+                        </div>
                     </div>
                 </div>
             }
@@ -104,12 +118,15 @@
                     <p class="text-xl font-semibold text-gray-800 mb-2">Sorry, no results found!</p>
                     <p class="text-gray-600 mb-6">Try adjusting your search terms or filters.</p>
                     <button class="bg-orange-400 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out cursor-pointer"
-                    (click)="ClearFilters()">
+                            (click)="ClearFilters()">
                         Clear All Filters
                     </button>
                 </div>
             }
         </div>
+        @if (errorMessage) {
+            <div class="text-red-500 text-center p-4">{{errorMessage}} <button (click)="GetProducts()" class="ml-2 bg-orange-500 px-4 py-2 rounded text-white">Retry</button></div>
+        }
     </div>
     <app-basket></app-basket>
 </Main>

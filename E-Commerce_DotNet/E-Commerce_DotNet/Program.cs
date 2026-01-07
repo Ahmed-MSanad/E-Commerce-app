@@ -1,12 +1,4 @@
-using Domain.Contracts;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Persistence;
-using Persistence.Data;
-using Persistence.Repositories;
-using Services.Abstraction;
-using Services.Implementation;
-using StackExchange.Redis;
+using E_Commerce_DotNet.Extensions;
 
 namespace E_Commerce_DotNet
 {
@@ -16,37 +8,17 @@ namespace E_Commerce_DotNet
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            
+            builder.Services.AddCoreServices(builder.Configuration);
+
+            builder.Services.AddPresentationServices();
+
             builder.Services.AddOpenApi();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Commerce", Version = "v1" });
-            });
-
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("StoreDB"));
-            });
-            builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
-                ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"))
-            );
-
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IServiceManager, ServiceManager>();
-            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
-            builder.Services.AddAutoMapper(cfg =>
-            {
-                //cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
-                cfg.AddMaps(typeof(ServiceManager).Assembly);
-            });
-
 
             var app = builder.Build();
 
-            await SeedStoreDbAsync(app);
+            await app.SeedDbAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -67,19 +39,13 @@ namespace E_Commerce_DotNet
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
-        }
-        public static async Task SeedStoreDbAsync(WebApplication app)
-        {
-            using var scope = app.Services.CreateScope();
-
-            var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-
-            await dbInitializer.InitializeStoreDbAsync();
         }
     }
 }

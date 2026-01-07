@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { BasketService } from '../../Core/Services/basket.service';
 import { IBasket } from '../../Core/Interfaces/ibasket';
 import { ProductService } from '../../Core/Services/product.service';
@@ -21,7 +21,7 @@ export class BasketComponent implements OnInit{
   });
 
   ngOnInit(){
-    this.GetBasket();
+    // this.GetBasket();
   }
 
   GetBasket(){
