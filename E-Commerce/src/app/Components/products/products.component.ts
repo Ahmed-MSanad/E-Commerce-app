@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { IProduct } from '../../Core/Interfaces/iproduct';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortByEnum, sortDirectionEnum } from '../../Core/Enums/sort-by.enum';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { BasketService } from '../../Core/Services/basket.service';
 import { BasketComponent } from '../basket.component/basket.component';
@@ -13,7 +13,7 @@ import { BasketComponent } from '../basket.component/basket.component';
 
 @Component({
   selector: 'app-products.component',
-  imports: [FormsModule, NgxSpinnerModule, CommonModule, BasketComponent, JsonPipe],
+  imports: [FormsModule, NgxSpinnerModule, CommonModule, BasketComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -46,8 +46,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.pagination.pageSize.set(res.pageSize);
         this.pagination.totalItemsCount.set(res.totalItemsCount);
         this._productService.filteredList.set([...this.productList()]);
-        console.log("filtered List: ", this._productService.filteredList());
-        console.log("product List: ", this.productList());
       },
       error:(err) => {
         console.log(err.error);
@@ -103,26 +101,19 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this._Router.navigate(["/ProductDetails", id]);
   }
 
-  showPreviousImage(productIndex: number): void {
-      const product = this._productService.filteredList()[productIndex];
-      if (!product?.productImages || product.productImages.length <= 1) return;  // Guard: No-op if invalid/single image
-      product.currentImageIndex.update(oldIndex => oldIndex > 0 ? oldIndex - 1 : product.productImages.length - 1);
+  showPreviousImage(productIndex : number) : void{
+    this._productService.filteredList()[productIndex].currentImageIndex.update(oldIndex => oldIndex > 0 ? oldIndex - 1 : this.productList()[productIndex].productImages.length - 1);
   }
-
-  showNextImage(productIndex: number): void {
-      const product = this._productService.filteredList()[productIndex];
-      if (!product?.productImages || product.productImages.length <= 1) return;  // Guard
-      product.currentImageIndex.update(oldIndex => oldIndex < product.productImages.length - 1 ? oldIndex + 1 : 0);
+  showNextImage(productIndex : number) : void{
+    this._productService.filteredList()[productIndex].currentImageIndex.update(oldIndex => oldIndex < this.productList()[productIndex].productImages.length - 1 ? oldIndex + 1 : 0);
   }
 
   getPreviousPage() : void{
     this.pagination.pageIndex.update(oldIndex => oldIndex == 0 ? oldIndex : oldIndex - 1);
-    console.log("new page index: ", this.pagination.pageIndex());
     this.GetProducts();
   }
   getNextPage() : void{
     this.pagination.pageIndex.update(oldIndex => oldIndex * this.pagination.pageSize() >= this.pagination.totalItemsCount() ? oldIndex : oldIndex + 1);
-    console.log("new page index: ", this.pagination.pageIndex());
     this.GetProducts();
   }
 

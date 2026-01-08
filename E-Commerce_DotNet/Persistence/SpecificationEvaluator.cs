@@ -1,4 +1,5 @@
-﻿using Domain.Contracts;
+﻿using System.Linq;
+using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
@@ -15,6 +16,11 @@ namespace Persistence
 
             if(specification.isPaginated)
                 query = query.Skip(specification.Skip).Take(specification.Take);
+            
+            if(specification.OrderBy is not null)
+                query.OrderBy(specification.OrderBy);
+            else if(specification.OrderByDescending is not null)
+                query.OrderByDescending(specification.OrderByDescending);
 
             return query;
         }
